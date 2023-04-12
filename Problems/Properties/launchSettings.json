@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Problems": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "$(Configuration)"
+      },
+      "sqlDebugging": true
+    }
+  }
+}
