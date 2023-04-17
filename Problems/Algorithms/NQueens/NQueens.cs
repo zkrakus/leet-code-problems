@@ -1,10 +1,15 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections;
 
 namespace Problems.Algorithms.NQueens;
-public static class NQueens
+public class NQueens
 {
+    private readonly List<char[,]> _validBoardCollection = new();
+
     private static readonly char EMPTY_SPACE = '.';
     private static readonly char QUEEN = 'Q';
+    private int _firstQueenColumn = 0;
 
     /// <summary>
     /// Algorithm:
@@ -17,7 +22,7 @@ public static class NQueens
     /// 
     /// Analysis:
     /// </summary>
-    public static IList<char[,]> RunBruteForce(int boardSize)
+    public IList<char[,]> RunBruteForce(int boardSize)
     {
         // Explicit solutions.
         if (boardSize is <= 0 or 2 or 3)
@@ -28,53 +33,84 @@ public static class NQueens
         return FindSolutions(boardSize);
     }
 
-    private static char[][,] FindSolutions(int boardSize)
+    private char[][,] FindSolutions(int boardSize)
     {
         var validBoardCollection = new List<char[,]>();
 
         // The maximum number of solutions is constrained by the boardsize because we can only have 1 queen per row and column.
         // If we can place a queen on each row and/or column we know we have a solution.
         // Let's see if we have a valid solution for any column start positions on the first row.
-        for (var col = 0; col < boardSize; col++)
-        {
-            var chessboard = new char[boardSize, boardSize];
-            var solution = FindSolution(chessboard, col, 0);
-            if (solution != null)
-                validBoardCollection.Add(solution);
-        }
+        var chessboard = new char[boardSize, boardSize];
+        _firstQueenColumn = 0;
+        var solution = FindSolution(chessboard, 0, 0);
 
-        return validBoardCollection.ToArray();
+        return _validBoardCollection.ToArray();
     }
 
-    private static char[,]? FindSolution(char[,] board, int col, int row)
+    private char[,]? FindSolution(char[,] board, int col, int row)
     {
         var validPosition = CheckValidPosition(board, col, row);
 
         if (validPosition)
             PlaceQueen(board, col, row);
 
-        // Valid position on the final row. Final solution.
+        // Valid position on the final row. Save chessboard and find next solution.
         var boardSize = board.GetLength(0) - 1;
         if (validPosition && row == boardSize)
+        {
+            _validBoardCollection.Add(board);
+
+            // Find Queen on first row.
+            var queenFirstRowCol = 0;
+            while (queenFirstRowCol <= boardSize)
+            {
+                if (board[0, queenFirstRowCol] == QUEEN)
+                    break;
+
+                queenFirstRowCol++;
+            }
+
+            // If queen is not in last column. Try to find valid solution with queen in next column.
+            if (queenFirstRowCol != boardSize)
+            {
+                var tmp = FindSolution(new char[boardSize + 1, boardSize + 1], queenFirstRowCol + 1, 0);
+                if (tmp != null)
+                    board = tmp;
+            }
+
             return board;
+        }
 
         // We could not find a valid solution after iterating through the entire board. No solution.
-        if (row == boardSize && col == boardSize)
+        if (!validPosition && row == boardSize && col == boardSize)
             return null;
 
-        // Find solution on next row or on next column on current row.
-        return col == boardSize
-            ? FindSolution(board, 0, ++row)
-            : FindSolution(board, ++col, row);
+        // Could not place queen on this row. No solution.
+        if (!validPosition && col == boardSize)
+            return null;
+
+        // If we found a valid position try to find a full solution on the next row.
+        char[,]? solution = null;
+        if (validPosition)
+            solution = FindSolution(board, 0, row + 1);
+
+        // If no solution exists for the above position. Unset the current position and try to find a solution in 
+        // a subsequent column ensuring all combinations of valid placements are tried.
+        if (solution == null)
+        {
+            PlaceEmpty(board, col, row);
+
+            // Don't continue to next row. If we reached the end of the row when there was no solution, we're done.
+            if (col != boardSize)
+                solution = FindSolution(board, col + 1, row);
+        }
+
+        return solution;
     }
 
-    private static bool CheckValidPosition(char[,] board, int column, int row)
+    public static bool CheckValidPosition(char[,] board, int column, int row)
     {
         var n = board.GetLength(0);
-
-        // Check current position.
-        if (board[column, row] == QUEEN)
-            return false;
 
         // Scan horizontally.
         // For a horizontal scan we want to iterate over the column.
@@ -82,7 +118,7 @@ public static class NQueens
             var i = (column + 1) % n;
             while (i != column)
             {
-                if (board[i, row] == QUEEN)
+                if (board[row, i] == QUEEN)
                     return false;
 
                 i = ++i % n;
@@ -96,7 +132,7 @@ public static class NQueens
             var j = (row + 1) % n;
             while (j != row)
             {
-                if (board[column, j] == QUEEN)
+                if (board[j, column] == QUEEN)
                     return false;
 
                 j = ++j % n;
@@ -121,13 +157,13 @@ public static class NQueens
         // For scanning a ascending diagonol we want to increment the column and decrement the row.
         {
             int i = column + 1, j = row - 1;
-            while (i < row && j >= 0)
+            while (i < n && j >= 0)
             {
                 if (board[j, i] == QUEEN)
                     return false;
 
-                i = ++i % n;
-                j = --j % n;
+                i = ++i;
+                j = --j;
             }
         }
 
@@ -154,8 +190,8 @@ public static class NQueens
                 if (board[j, i] == QUEEN)
                     return false;
 
-                i = --i % n;
-                j = --j % n;
+                i = --i;
+                j = --j;
             }
         }
 
@@ -163,8 +199,8 @@ public static class NQueens
     }
 
     private static void PlaceQueen(char[,] board, int col, int row)
-        => board[col, row] = QUEEN;
+        => board[row, col] = QUEEN;
 
     private static void PlaceEmpty(char[,] board, int col, int row)
-        => board[col, row] = EMPTY_SPACE;
+        => board[row, col] = EMPTY_SPACE;
 }

@@ -1,6 +1,10 @@
 ﻿using Problems.Algorithms.NQueens;
 using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Threading;
 using Xunit;
+using Utilities.Extensions.RandomExtensions;
 
 namespace Tests.Problems.Algorithms.NQueensTests;
 public class RunBruteForce
@@ -8,62 +12,72 @@ public class RunBruteForce
     [Fact]
     public static void RunBruteForce_ShouldReturnEmpty_WhenNegativeOrZero()
     {
-        //Assert.Equal(Array.Empty<char[]>(), NQueens.RunBruteForce(-1));
-        //Assert.Equal(Array.Empty<char[]>(), NQueens.RunBruteForce(int.MinValue));
-        //Assert.Equal(Array.Empty<char[]>(), NQueens.RunBruteForce(0));
+        var nQueens = new NQueens();
+
+        Assert.Equal(Array.Empty<char[,]>(), nQueens.RunBruteForce(-1));
+        Assert.Equal(Array.Empty<char[,]>(), nQueens.RunBruteForce(int.MinValue));
+        Assert.Equal(Array.Empty<char[,]>(), nQueens.RunBruteForce(0));
     }
 
     [Fact]
     public static void RunBruteForce_ShouldReturnResult_WhenOne()
     {
-        var chessboard = new char[][] { new char[] { 'Q' } };
-        //Assert.Equal(chessboard, NQueens.RunBruteForce(1));
+        var nQueens = new NQueens();
+
+        var chessboard = new List<char[,]> { new char[,] { { 'Q' } } };
+        Assert.Equal(chessboard, nQueens.RunBruteForce(1));
     }
 
     [Fact]
     public static void RunBruteForce_ShouldReturnEmptyResult_WhenTwoOrThree()
     {
-        //Assert.Equal(Array.Empty<char[]>(), NQueens.RunBruteForce(2));
-        //Assert.Equal(Array.Empty<char[]>(), NQueens.RunBruteForce(3));
+        var nQueens = new NQueens();
+
+        var chessboard = Array.Empty<char[,]>();
+        Assert.Equal(chessboard, nQueens.RunBruteForce(2));
+        Assert.Equal(chessboard, nQueens.RunBruteForce(3));
     }
 
     [Fact]
     public static void RunBruteForce_ShouldReturnResult_WhenFour()
     {
-        var result = NQueens.RunBruteForce(4);
+        var queens = new NQueens();
 
-        foreach(var chessboard in result)
-        {
-            Console.WriteLine(  );
-        }
-    }
+        var result = queens.RunBruteForce(4);
 
-    private static bool CompareChessboards(char[][] chessboard1, char[][] chessboard2)
-    {
-        for (var i = 0; i < chessboard1.Length; i++)
+        foreach (var chessboard in result)
         {
-            for (var j = 0; j < chessboard1[i].Length; j++)
+            for(var m = 0;  m < chessboard.Rank; m++)
             {
-
+                for(var n = 0;  n < chessboard.GetLength(m); n++)
+                {
+                    if (chessboard[m, n] == 'Q')
+                    {
+                        Assert.True(NQueens.CheckValidPosition(chessboard, n, m));
+                    }
+                }
             }
         }
 
-        return true;
     }
 
-    private static bool CompareChessboardCells(char[][] chessboard1, char[][] chessboard2, int i, int j)
+    [Fact]
+    public static void RunBruteForce_ShouldReturnResult_WhenN()
     {
-        try
-        {
-            if (chessboard1[i][j] != chessboard2[i][j])
-                return false;
+        var queens = new NQueens();
+        var random = new Random();
+        var result = queens.RunBruteForce(random.Next(0, 8));
 
-        }
-        catch (IndexOutOfRangeException)
+        foreach (var chessboard in result)
         {
-            return false;
+            for (var m = 0; m < chessboard.Rank; m++)
+            {
+                for (var n = 0; n < chessboard.GetLength(m); n++)
+                {
+                    if (chessboard[m, n] == 'Q')
+                        Assert.True(NQueens.CheckValidPosition(chessboard, n, m));
+                }
+            }
         }
-
-        return true;
     }
 }
