@@ -6,7 +6,7 @@ using Tests.Fixtures;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.Utilities.ListExtensionsTests;
+namespace Tests.DataStructures.ListExtensionsTests;
 
 public class ReverseTests
 {

@@ -1,4 +1,4 @@
-﻿namespace Utilities.Extensions.RandomExtensions;
+﻿namespace Core.Extensions.RandomExtensions;
 
 public static class RandomExtension
 {
@@ -26,7 +26,7 @@ public static class RandomExtension
             var buf = new byte[8];
             random.NextBytes(buf);
             ulongRand = (ulong)BitConverter.ToInt64(buf, 0);
-        } while (ulongRand > ulong.MaxValue - (((ulong.MaxValue % uRange) + 1) % uRange));
+        } while (ulongRand > ulong.MaxValue - (ulong.MaxValue % uRange + 1) % uRange);
 
         return (long)(ulongRand % uRange) + min;
     }

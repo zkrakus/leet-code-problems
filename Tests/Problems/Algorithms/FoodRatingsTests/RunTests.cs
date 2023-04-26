@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace Tests.Problems.Algorithms.InterviewTests;
+namespace Tests.Problems.Algorithms.FoodRatingsTests;
 public class RunTests
 {
     [Fact]

@@ -1,6 +1,6 @@
-﻿using Problems.AddTwoNumbers;
+﻿using Core.Extensions.RandomExtensions;
+using Problems.AddTwoNumbers;
 using System;
-using Utilities.Extensions.RandomExtensions;
 using Xunit;
 using Xunit.Abstractions;
 

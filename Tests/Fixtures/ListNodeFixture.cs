@@ -1,8 +1,8 @@
-﻿using DataStructures.Lists;
+﻿using Core.Extensions.RandomExtensions;
+using DataStructures.Lists;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Utilities.Extensions.RandomExtensions;
 
 namespace Tests.Fixtures;
 internal static class ListNodeFixture

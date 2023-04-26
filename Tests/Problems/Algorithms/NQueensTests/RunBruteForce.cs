@@ -1,10 +1,7 @@
 ﻿using Problems.Algorithms.NQueens;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Threading;
 using Xunit;
-using Utilities.Extensions.RandomExtensions;
 
 namespace Tests.Problems.Algorithms.NQueensTests;
 public class RunBruteForce
