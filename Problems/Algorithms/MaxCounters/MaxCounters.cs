@@ -9,7 +9,7 @@ namespace Problems.Algorithms.MaxCounters;
 public static class MaxCounters
 {
     /// <summary>
-    /// Probelm:
+    /// Problem:
     /// You are given N counters, initially set to 0, and you have two possible operations on them:
     /// increase(X) − counter X is increased by 1, 
     /// max counter − all counters are set to the maximum value of any counter.
@@ -19,6 +19,10 @@ public static class MaxCounters
     /// if A[K] = N + 1 then operation K is max counter.
     /// 
     /// Return the values of the countesr after the operations are processed.
+    /// 
+    /// Analysis:
+    /// t(n) = O(m + n) : n is the number of counters and m is the number of operations.
+    /// s(n) = O(n) : where n is the amount of counters.
     /// </summary>
     /// <param name="n">Number of counters.</param>
     /// <param name="a">Array of opeartions</param>
@@ -55,11 +59,5 @@ public static class MaxCounters
         }
 
         return counters;
-    }
-
-    private static void SetCountersToMax(int[] a, int val)
-    {
-        for (var i = 0; i < a.Length; ++i)
-            a[i] = val;
     }
 }

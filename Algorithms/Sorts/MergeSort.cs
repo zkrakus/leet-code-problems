@@ -42,18 +42,6 @@ public static class MergeSort
         var rightArrayLength = r.Length;
         var sortedArray = new int[leftArrayLength + rightArrayLength];
 
-        //for(k = 0; k < leftArrayLength + rightArrayLength; k++)
-        //{
-        //    if(l[i] <= r[j])
-        //    {
-        //        sortedArray[k] = l[i];
-        //    }
-        //    else
-        //    {
-        //        sortedArray[k] = r[i];
-        //    } 
-        //}
-
         while (i < leftArrayLength && j < rightArrayLength)
         {
             var leftValue = l[i];
