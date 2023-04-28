@@ -20,8 +20,8 @@ public static class MaxProductOfThree
 {
     /// <summary>
     /// Analysis:
-    /// 
-    /// 
+    /// t(n) = O(n(log(n))
+    /// s(n) = O(1)
     /// </summary>
     public static int Run(int[] a)
     {
