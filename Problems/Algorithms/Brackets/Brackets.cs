@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Problems.Algorithms.Brackets;
 
 /// <summary>
+/// Problem: 
 /// A string S consisting of N characters is considered to be properly nested if any of the following conditions is true:
 /// 
 /// S is empty;
@@ -22,6 +23,11 @@ namespace Problems.Algorithms.Brackets;
 /// </summary>
 public static class Brackets
 {
+    /// <summary>
+    /// Analysis:
+    /// t(n) == O(n)
+    /// s(n) == O(n/2) = O(n)
+    /// </summary>
     public static int Run(string s)
     {
         if (s == null || s.Length == 0)
@@ -48,5 +54,12 @@ public static class Brackets
         return stack.IsNullOrEmpty() ?  1 : 0;
     }
 
+    struct A {
+        int x;
 
+        public string ToString()
+        {
+            return x.ToString();
+        }
+    }
 }
