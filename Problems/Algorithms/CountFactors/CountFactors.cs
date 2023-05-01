@@ -28,7 +28,7 @@ public static class CountFactors
 
         n = Math.Abs(n);
         int result = 0;
-        int i = 1;
+        int i;
         for(i = 1; i * i < n; i++)
         {
             if (n % i == 0)
