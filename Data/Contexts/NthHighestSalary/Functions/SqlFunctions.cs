@@ -35,10 +35,11 @@ public static class SqlFunctions
                     Select distinct Max(a.Salary) as [SALARY]
                     INTO #tempEmployees
                     FROM (
-	                    Select a.Salary , DENSE_RANK() over (ORDER BY Salary DESC) as [Rank]
+	                    Select a.Salary, 
+                        DENSE_RANK() over (ORDER BY Salary DESC) as [Rank]
 	                    From NthHighestSalary.dbo.Employees AS a
                     ) as a
-                    WHERE a.[Rank] = 1
+                    WHERE a.[Rank] = @N
 
                     Declare @Salary INT
                     Select @Salary = Salary from #tempEmployees
@@ -63,7 +64,7 @@ public static class SqlFunctions
 	                        Select a.Salary , DENSE_RANK() over (ORDER BY Salary DESC) as [Rank]
 	                        From NthHighestSalary.dbo.Employees AS a
                         ) as a
-                        WHERE a.[Rank] = 6
+                        WHERE a.[Rank] = @N
 
                         SELECT CASE WHEN @@Rowcount = 0 
 	                        THEN NULL
