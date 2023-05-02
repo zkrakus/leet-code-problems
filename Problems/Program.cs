@@ -1,4 +1,5 @@
 ﻿using Data.Contexts.CombineTwoTables;
+using Data.Contexts.DepartmentHighestSalary;
 using Data.Contexts.NthHighestSalary;
 using Data.Contexts.SecondHighestSalary;
 using Data.Contexts.SelfJoin;
@@ -30,6 +31,11 @@ static void ConfigureServices(HostBuilderContext host, IServiceCollection servic
         .AddDbContext<NthHighestSalaryDbContext>(options =>
             options.UseSqlServer(
                 host.Configuration.GetConnectionString("NthHighestSalary"), builder =>
+                builder.MigrationsAssembly("Data"))
+        )
+        .AddDbContext<DepartmentHighestSalaryDbContext>(options =>
+            options.UseSqlServer(
+                host.Configuration.GetConnectionString("DepartmentHighestSalary"), builder =>
                 builder.MigrationsAssembly("Data"))
         );
 

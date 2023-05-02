@@ -57,20 +57,18 @@ public static class SqlFunctions
         @"EXEC('
                 CREATE OR ALTER FUNCTION usp_GetNthHighestSalary(@N INT) RETURNS INT AS
                 BEGIN
-                    RETURN (
-                        Declare @Salary INT
-                        Select distinct @Salary = Max(a.Salary)
+                    Declare @Salary INT;
+                    Select distinct @Salary = Max(a.Salary)
                         FROM (
 	                        Select a.Salary , DENSE_RANK() over (ORDER BY Salary DESC) as [Rank]
 	                        From NthHighestSalary.dbo.Employees AS a
                         ) as a
                         WHERE a.[Rank] = @N
 
-                        SELECT CASE WHEN @@Rowcount = 0 
-	                        THEN NULL
-	                        ELSE @Salary
-	                        END as Salary
-                    );
+                    IF @@ROWCOUNT = 0
+                        RETURN NULL;
+
+                    RETURN @Salary;
                 END
             ')";
 }
