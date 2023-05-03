@@ -47,8 +47,7 @@ public static class BestTimeToBuyAndSellStock
         var maxProfit = 0;
         for (var i = 0; i < prices.Length; i++)
         {
-            if (prices[i] < lowerBound)
-                lowerBound = prices[i];
+            lowerBound = Math.Min(prices[i], lowerBound);
 
             if (prices[i] - lowerBound > maxProfit)
                 maxProfit = prices[i] - lowerBound;
