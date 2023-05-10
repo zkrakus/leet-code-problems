@@ -28,13 +28,13 @@ public class DepartmentHighestSalaryDatabaseFixture
                         context.Add(d1);
                         context.Add(d2);
 
-                        _ = context.Add(new Employee() { Id = 1, Name = "Joe", Salary = 70000, DepartmentID = 1 });
-                        _ = context.Add(new Employee() { Id = 2, Name = "Jim", Salary = 90000, DepartmentID = 1 });
-                        _ = context.Add(new Employee() { Id = 3, Name = "Henry", Salary = 80000, DepartmentID = 2 });
-                        _ = context.Add(new Employee() { Id = 4, Name = "Sam", Salary = 60000, DepartmentID = 2 });
-                        _ = context.Add(new Employee() { Id = 5, Name = "Max", Salary = 90000, DepartmentID = 1 });
+                        context.Add(new Employee() { Id = 1, Name = "Joe", Salary = 70000, DepartmentID = 1 });
+                        context.Add(new Employee() { Id = 2, Name = "Jim", Salary = 90000, DepartmentID = 1 });
+                        context.Add(new Employee() { Id = 3, Name = "Henry", Salary = 80000, DepartmentID = 2 });
+                        context.Add(new Employee() { Id = 4, Name = "Sam", Salary = 60000, DepartmentID = 2 });
+                        context.Add(new Employee() { Id = 5, Name = "Max", Salary = 90000, DepartmentID = 1 });
 
-                        _ = context.SaveChanges();
+                        context.SaveChanges();
                     }
                 }
 

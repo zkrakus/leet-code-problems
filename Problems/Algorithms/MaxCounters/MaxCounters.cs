@@ -29,7 +29,7 @@ public static class MaxCounters
     public static int[] Run(int n, int[] a)
     {
         if (!a.Any() || a == null || n == 0)
-            return a;
+            return Array.Empty<int>();
 
         var counters = new int[n];
         var localMax = 0;

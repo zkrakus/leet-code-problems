@@ -66,6 +66,7 @@ public class DynamicObjectParser : IParser
 
             var value = columns[1].Trim(_trimChars);
             value = value.Substring(0, value.Length - 1).Trim(_trimChars);
+
             if (bool.TryParse(value, out bool boolean))
                 output[key] = boolean;
             else if (int.TryParse(value, out int integer))
@@ -99,6 +100,7 @@ public class ConfigurationBag : DynamicObject
 
             return value;
         }
+
         set
         {
             if(value == null || (value.GetType() == typeof(string) && value.ToString() == string.Empty))
