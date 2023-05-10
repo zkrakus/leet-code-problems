@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Problems\Problems.csproj" />
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
 </Project>

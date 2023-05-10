@@ -17,4 +17,15 @@ public class SqlFunctions
         Where
             e1.Salary > e2.Salary";
 
+    public const string QueryWithCTE = @"
+        WITH EmployeeManagers AS (
+          SELECT e1.id AS EmployeeId, e1.name AS EmployeeName, e2.id AS ManagerId, e2.name AS ManagerName, e1.Salary as Salary1, e2.Salary as Salary2
+          FROM Employee e1
+          INNER JOIN Employee e2 ON e1.managerId = e2.id
+        )
+        SELECT EmployeeName as Employee
+        FROM EmployeeManagers
+        WHERE Salary1 > Salary2
+";
+
 }

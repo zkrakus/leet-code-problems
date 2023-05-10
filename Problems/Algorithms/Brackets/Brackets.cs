@@ -53,13 +53,4 @@ public static class Brackets
 
         return stack.IsNullOrEmpty() ?  1 : 0;
     }
-
-    struct A {
-        int x;
-
-        public string ToString()
-        {
-            return x.ToString();
-        }
-    }
 }

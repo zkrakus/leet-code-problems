@@ -13,7 +13,12 @@ public class RunOptimizedTests
     }
 
     [Fact]
-    public void Should_Find_Max_Area() =>
-        //Assert.Equal(5, ContainerWithTheMostWater.RunOptimized(new int[] { 5, 5 }));
-        Assert.Equal(5, ContainerWithTheMostWater.RunOptimized(new int[] { 1, 5, 5, 1 }));//Assert.Equal(25, ContainerWithTheMostWater.RunOptimized(new int[] { 5, 1, 1, 1, 1, 5 }));//Assert.Equal(20, ContainerWithTheMostWater.RunOptimized(new int[] { 4, 1, 1, 1, 1, 6 }));
+    public void Should_Find_Max_Area()
+    {
+        Assert.Equal(5, ContainerWithTheMostWater.RunOptimized(new int[] { 5, 5 }));
+        Assert.Equal(5, ContainerWithTheMostWater.RunOptimized(new int[] { 1, 5, 5, 1 }));
+        Assert.Equal(25, ContainerWithTheMostWater.RunOptimized(new int[] { 5, 1, 1, 1, 1, 5 }));
+        Assert.Equal(20, ContainerWithTheMostWater.RunOptimized(new int[] { 4, 1, 1, 1, 1, 6 }));
+    }
+
 }

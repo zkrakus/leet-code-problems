@@ -27,15 +27,19 @@ public static class BinaryGap
         var inGap = false;
         for(var i = 0; i < binaryValue.Length; i++)
         {
-            if (binaryValue[i] == '1' && inGap == false)
+            if (inGap == false && binaryValue[i] == '1')
                 inGap = true;
-            else if (inGap == true && binaryValue[i] == '0')
-                currentGapLength++;
-            else if (binaryValue[i] == '1' && inGap == true)
+
+            if (inGap == true)
             {
-                largestGapLength = Math.Max(largestGapLength, currentGapLength);
-                currentGapLength = 0;
-            } 
+                if (binaryValue[i] == '0')
+                    currentGapLength++;
+                else
+                {
+                    largestGapLength = Math.Max(largestGapLength, currentGapLength);
+                    currentGapLength = 0;
+                }
+            }
         }
 
         return largestGapLength;
