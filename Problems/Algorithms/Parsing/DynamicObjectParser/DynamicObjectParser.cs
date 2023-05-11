@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
-using System.Dynamic;
-using System.Reflection;
+﻿using System.Dynamic;
 using System.Text.RegularExpressions;
 
 namespace Problems.Algorithms.Parsing.DynamicObjectParser;
@@ -83,19 +78,19 @@ public interface IParser
     public dynamic? Parse(string? configuration);
 }
 
-public class ConfigurationBag : DynamicObject
+public sealed class ConfigurationBag : DynamicObject
 {
     private const string _validPropertyRegex = "^(?![0-9])[a-zA-Z0-9]+$";
-    Dictionary<string, object> _dictionary = new();
+    Dictionary<string, object> _memberStore = new();
 
     public object? this[string key]
     {
         get
         {
-            if (!_dictionary.ContainsKey(key))
+            if (!_memberStore.ContainsKey(key))
                 throw new UnknownKeyException();
 
-            _dictionary.TryGetValue(key, out object? value);
+            _memberStore.TryGetValue(key, out object? value);
 
             return value;
         }
@@ -111,24 +106,24 @@ public class ConfigurationBag : DynamicObject
             if (!IsValidPropertyName(key))
                 throw new InvalidKeyException();
 
-            if(!_dictionary.TryAdd(key, value!))
+            if(!_memberStore.TryAdd(key, value!))
                 throw new InvalidKeyException();
         }
     }
 
     public override bool TryGetMember(GetMemberBinder binder, out object? result) {
-        if (!_dictionary.ContainsKey(binder.Name))
+        if (!_memberStore.ContainsKey(binder.Name))
             throw new UnknownKeyException();
         
-        return _dictionary.TryGetValue(binder.Name, out result);
+        return _memberStore.TryGetValue(binder.Name, out result);
     }
 
     public override bool TrySetMember(SetMemberBinder binder, object? value)
     {
-        if (_dictionary.ContainsKey(binder.Name))
+        if (_memberStore.ContainsKey(binder.Name))
             throw new DuplicateKeyException();
 
-        _dictionary[binder.Name] = value!;
+        _memberStore[binder.Name] = value!;
 
         return true;
     }
