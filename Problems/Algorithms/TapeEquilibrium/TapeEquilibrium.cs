@@ -19,7 +19,7 @@ public class TapeEquilibrium
     {
         long leftSum = a[0];
         long rightSum = a.Sum() - a[0];
-        long minDifference = Math.Abs(rightSum - leftSum);
+        var minDifference = Math.Abs(rightSum - leftSum);
 
         int l = 1, r = 2;
         while (r < a.Length)

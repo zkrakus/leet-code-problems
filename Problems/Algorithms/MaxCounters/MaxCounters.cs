@@ -43,7 +43,7 @@ public static class MaxCounters
                 globalMax = localMax;
             else if (counterIndex <= n)
             {
-                int currentValue = counters[counterIndex - 1];
+                var currentValue = counters[counterIndex - 1];
                 if (currentValue < globalMax)
                     counters[counterIndex - 1] = globalMax;
 

@@ -12,7 +12,7 @@ public static class StringPermutations
 {
     public static IList<string> Permute(string s)
     {
-        List<string> permutations = new List<string>();
+        var permutations = new List<string>();
         PermuteRec(s, "", permutations);
 
         return permutations;
@@ -26,10 +26,10 @@ public static class StringPermutations
             return;
         }
 
-        for (int i = 0; i < s.Length; i++)
+        for (var i = 0; i < s.Length; i++)
         {
             var left = s.Substring(0, i);
-            char ch = s[i];
+            var ch = s[i];
             var right = s.Substring(i + 1);
             var rest = left + right;
             PermuteRec(rest, permutation + ch, permutations);

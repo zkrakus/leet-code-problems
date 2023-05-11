@@ -23,17 +23,14 @@ public static class MaxProfit
         if (a == null || a.Length == 1)
             return 0;
 
-        long maxProfit = long.MinValue;
-        long localMin = long.MaxValue;
-        foreach(int tick in a)
+        var maxProfit = long.MinValue;
+        var localMin = long.MaxValue;
+        foreach(var tick in a)
         {
             localMin = Math.Min(localMin, tick);
             maxProfit = Math.Max(maxProfit, tick - localMin);
         }
 
-        if (maxProfit < 0)
-            return 0;
-
-        return (int)maxProfit;
+        return maxProfit < 0 ? 0 : (int)maxProfit;
     }
 }

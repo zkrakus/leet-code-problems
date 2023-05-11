@@ -58,18 +58,17 @@ public class DynamicObjectParser : IParser
             return new ConfigurationBag();
 
         dynamic output = new ConfigurationBag();
-        foreach (var line in configuration.Split(Environment.NewLine, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
+        foreach (var row in configuration.Split(Environment.NewLine, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
         {
-            var row = line;
             var columns = row.Split(':');
             var key = columns[0].Trim(_trimChars);
 
             var value = columns[1].Trim(_trimChars);
             value = value.Substring(0, value.Length - 1).Trim(_trimChars);
 
-            if (bool.TryParse(value, out bool boolean))
+            if (bool.TryParse(value, out var boolean))
                 output[key] = boolean;
-            else if (int.TryParse(value, out int integer))
+            else if (int.TryParse(value, out var integer))
                 output[key] = integer;
             else
                 output[key] = value;
@@ -81,7 +80,7 @@ public class DynamicObjectParser : IParser
 
 public interface IParser
 {
-    public dynamic? Parse(string configuration);
+    public dynamic? Parse(string? configuration);
 }
 
 public class ConfigurationBag : DynamicObject

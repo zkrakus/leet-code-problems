@@ -9,7 +9,6 @@ public class NQueens
 
     private static readonly char EMPTY_SPACE = '.';
     private static readonly char QUEEN = 'Q';
-    private int _firstQueenColumn = 0;
 
     /// <summary>
     /// Algorithm:
@@ -41,7 +40,6 @@ public class NQueens
         // If we can place a queen on each row and/or column we know we have a solution.
         // Let's see if we have a valid solution for any column start positions on the first row.
         var chessboard = new char[boardSize, boardSize];
-        _firstQueenColumn = 0;
         var solution = FindSolution(chessboard, 0, 0);
 
         return _validBoardCollection.ToArray();

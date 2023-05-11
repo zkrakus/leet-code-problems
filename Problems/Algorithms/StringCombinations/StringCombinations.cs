@@ -16,7 +16,7 @@ public static class StringCombinations
     {
         if (index == r)
         {
-            for (int j = 0; j < r; j++)
+            for (var j = 0; j < r; j++)
                 Console.Write(data[j] + " ");
             Console.WriteLine("");
             return;

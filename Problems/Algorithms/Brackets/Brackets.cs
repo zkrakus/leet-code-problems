@@ -45,7 +45,9 @@ public static class Brackets
                 {
                     if (brackets[stack.Peek()] != c)
                         return 0;
-                } catch { return 0; }
+                } catch { 
+                    return 0; 
+                }
                     
                 _ = stack.Pop();
             }
