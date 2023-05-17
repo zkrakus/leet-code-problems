@@ -19,7 +19,7 @@ namespace Problems.Algorithms.CountNonDivisible;
 public static class CountNonDivisible
 {
     /// <summary>
-    /// t(n) = 2n + (n * sqrt(2 * n)) = O(n = n(sqrt(n)))
+    /// t(n) = 2n + (n * sqrt(2 * n)) = O(n(sqrt(n)))
     /// s(n) = O(3n)
     /// </summary>
     public static int[] Run(int[] a)
