@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Problems.Algorithms.Arrays.OddOccurencesInArray;
+namespace Problems.Algorithms.ArraysAndHashing.OddOccurencesInArray;
 
 /// <summary>
 /// Problem:
@@ -21,11 +21,11 @@ public static class OddOccurencesInArray
     /// </summary>
     public static int Run(int[] a)
     {
-        if(a is null || a.Length == 0)
+        if (a is null || a.Length == 0)
             return 0;
 
         var pairs = new HashSet<int>();
-        foreach(var i in a)
+        foreach (var i in a)
             _ = !pairs.Contains(i) ? pairs.Add(i) : pairs.Remove(i);
 
         return pairs.First();

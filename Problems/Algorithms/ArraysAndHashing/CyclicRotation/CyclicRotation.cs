@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Problems.Algorithms.Arrays.CyclicRotation;
+namespace Problems.Algorithms.ArraysAndHashing.CyclicRotation;
 public static class CyclicRotation
 {
     public static int[] Run(int[] a, int k)
