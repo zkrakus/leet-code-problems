@@ -33,7 +33,7 @@ public static class Brackets
         if (s == null || s.Length == 0)
             return 1;
 
-        Stack<char> stack = new Stack<char>();
+        Stack<char> stack = new();
         Dictionary<char, char> brackets = new Dictionary<char, char>() { { '{', '}' }, { '[', ']' }, { '(', ')' } };
         foreach (var c in s)
         {
@@ -41,18 +41,13 @@ public static class Brackets
                 stack.Push(c);
             else
             {
-                try 
-                {
-                    if (brackets[stack.Peek()] != c)
-                        return 0;
-                } catch { 
-                    return 0; 
-                }
-                    
+                if (brackets.Count != 0 && brackets[stack.Peek()] != c)
+                    return 0;
+
                 _ = stack.Pop();
             }
         }
 
-        return stack.IsNullOrEmpty() ?  1 : 0;
+        return stack.IsNullOrEmpty() ? 1 : 0;
     }
 }

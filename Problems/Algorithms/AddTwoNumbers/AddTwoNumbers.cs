@@ -1,7 +1,7 @@
 ﻿using DataStructures.Extensions.ListExtensions;
 using DataStructures.Lists;
 
-namespace Problems.AddTwoNumbers;
+namespace Problems.Algorithms.AddTwoNumbers;
 
 public static class AddTwoNumbers
 {

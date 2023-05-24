@@ -33,7 +33,7 @@ public static class BinarySearch
         // Find the middle index of the array.
         // If the array is odd the middle index will be the middle odd value bisecting the array.
         // If the array is even, the middle index will be the first integer in the bisected array on the right.
-        // Special case, if the array is of length of, the left bisected array is of size 0. 
+        // Special case, if the array is of length 0, the left bisected array is of size 0. 
         // Whenever the array is odd the right bisected array will always be one cell larger due to integer division.
         var m = i + ((j - i) / 2);
 

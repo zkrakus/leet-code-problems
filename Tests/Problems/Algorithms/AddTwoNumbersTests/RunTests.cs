@@ -1,5 +1,5 @@
 ﻿using Core.Extensions.RandomExtensions;
-using Problems.AddTwoNumbers;
+using Problems.Algorithms.AddTwoNumbers;
 using System;
 using Xunit;
 using Xunit.Abstractions;
