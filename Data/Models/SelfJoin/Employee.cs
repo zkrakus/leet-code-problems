@@ -16,5 +16,4 @@ public class Employee
         LastName = lastName;
         SupervisorId = supervisorId;
     }
-
 }
